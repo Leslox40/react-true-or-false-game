@@ -4,6 +4,7 @@ class Game extends Component {
 	constructor(props) {
     	super(props);
       	const valuesArray = this.newQuestion();
+      //setting state
       	this.state = {
         	X: valuesArray[0],
           	Y: valuesArray[1],
@@ -12,6 +13,7 @@ class Game extends Component {
         }
     }
   
+  //Function generates random numbers X, Y, Z and P and returns an array containing those values
   	newQuestion = () => {
     	const value1 = Math.floor(Math.random() * 100);
 		const value2 = Math.floor(Math.random() * 100);
@@ -21,6 +23,7 @@ class Game extends Component {
       	return [value1, value2, value3, proposedAnswer];
     }
   
+  	// Updating State
   	updateState = (newValuesArray) => {
     	this.setState(currState => ({
         	X: newValuesArray[0],
@@ -47,4 +50,20 @@ class Game extends Component {
       	const finalAnswer = this.evaluateAnswer(event.target.name);
       	this.props.handleAnswer(finalAnswer);
     }
+  
+  // Render function 
+  	render() {
+  		const { X, Y, Z, P } = this.state;
+      	return (
+      		<div>
+        		<div className="equation">
+            		<p className="text">{`${X} + ${Y} + ${Z} = ${P}`}</p>
+          		</div>
+          		<button name='true' onClick = {this.handleAnswer}>True</button>
+          		<button name='false' onClick = {this.handleAnswer}>False</button>
+        	</div>
+       )
+  	}
 }
+
+export default Game;
